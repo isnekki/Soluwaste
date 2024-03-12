@@ -1,0 +1,292 @@
+{
+    "2024": {
+        "0": {
+            "dateModified": "7/5/2024",
+            "barangay": "Irisan",
+            "population": 5234,
+            "policy": "Policy Name",
+            "weightPerWeek": [
+                {
+                    "weight": 293,
+                    "levelOfEnforcement": 5
+                },
+                {
+                    "weight": 370,
+                    "levelOfEnforcement": 5
+                },
+                {
+                    "weight": 644,
+                    "levelOfEnforcement": 5
+                },
+                {
+                    "weight": 660,
+                    "levelOfEnforcement": 5
+                },
+                {
+                    "weight": 420,
+                    "levelOfEnforcement": 4
+                },
+                {
+                    "weight": 164,
+                    "levelOfEnforcement": 4
+                },
+                {
+                    "weight": 512,
+                    "levelOfEnforcement": 1
+                },
+                {
+                    "weight": 267,
+                    "levelOfEnforcement": 5
+                },
+                {
+                    "weight": 205,
+                    "levelOfEnforcement": 3
+                },
+                {
+                    "weight": 128,
+                    "levelOfEnforcement": 3
+                }
+            ]
+        },
+        "1": {
+            "dateModified": "7/5/2024",
+            "barangay": "East Quirino Hill",
+            "population": 5234,
+            "policy": "Policy Name",
+            "weightPerWeek": [
+                {
+                  "weight": 624,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 638,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 528,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 536,
+                  "levelOfEnforcement": 1
+                },
+                {
+                  "weight": 698,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 449,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 687,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 510,
+                  "levelOfEnforcement": 4
+                },
+                {
+                  "weight": 134,
+                  "levelOfEnforcement": 4
+                },
+                {
+                  "weight": 637,
+                  "levelOfEnforcement": 1
+                }
+              ]
+        },
+        "2": {
+            "dateModified": "7/5/2024",
+            "barangay": "Bonifacio",
+            "population": 5234,
+            "policy": "Policy Name",
+            "weightPerWeek": [
+                {
+                  "weight": 628,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 381,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 449,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 302,
+                  "levelOfEnforcement": 4
+                },
+                {
+                  "weight": 135,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 258,
+                  "levelOfEnforcement": 3
+                },
+                {
+                  "weight": 300,
+                  "levelOfEnforcement": 4
+                },
+                {
+                  "weight": 110,
+                  "levelOfEnforcement": 4
+                },
+                {
+                  "weight": 391,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 485,
+                  "levelOfEnforcement": 5
+                }
+              ]
+        },
+        "3": {
+            "dateModified": "7/5/2024",
+            "barangay": "Bakakeng Sur",
+            "population": 5234,
+            "policy": "Policy Name",
+            "weightPerWeek": [
+                {
+                  "weight": 643,
+                  "levelOfEnforcement": 1
+                },
+                {
+                  "weight": 170,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 321,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 672,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 628,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 368,
+                  "levelOfEnforcement": 3
+                },
+                {
+                  "weight": 168,
+                  "levelOfEnforcement": 4
+                },
+                {
+                  "weight": 656,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 410,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 267,
+                  "levelOfEnforcement": 1
+                }
+              ]
+        },
+        "4": {
+            "dateModified": "7/5/2024",
+            "barangay": "Aurora Hill",
+            "population": 5234,
+            "policy": "Policy Name",
+            "weightPerWeek": [
+                {
+                  "weight": 298,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 291,
+                  "levelOfEnforcement": 3
+                },
+                {
+                  "weight": 675,
+                  "levelOfEnforcement": 3
+                },
+                {
+                  "weight": 360,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 435,
+                  "levelOfEnforcement": 4
+                },
+                {
+                  "weight": 177,
+                  "levelOfEnforcement": 1
+                },
+                {
+                  "weight": 281,
+                  "levelOfEnforcement": 3
+                },
+                {
+                  "weight": 550,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 450,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 376,
+                  "levelOfEnforcement": 1
+                }
+              ]
+        },
+        "5": {
+            "dateModified": "7/5/2024",
+            "barangay": "Trancoville",
+            "population": 5234,
+            "policy": "Policy Name",
+            "weightPerWeek": [
+                {
+                  "weight": 612,
+                  "levelOfEnforcement": 1
+                },
+                {
+                  "weight": 499,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 413,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 518,
+                  "levelOfEnforcement": 5
+                },
+                {
+                  "weight": 356,
+                  "levelOfEnforcement": 4
+                },
+                {
+                  "weight": 503,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 314,
+                  "levelOfEnforcement": 3
+                },
+                {
+                  "weight": 277,
+                  "levelOfEnforcement": 2
+                },
+                {
+                  "weight": 498,
+                  "levelOfEnforcement": 3
+                },
+                {
+                  "weight": 686,
+                  "levelOfEnforcement": 2
+                }
+              ]
+        }    
+    }
+}
