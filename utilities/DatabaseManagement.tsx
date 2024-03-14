@@ -11,7 +11,7 @@ interface RowInclusionsProps {
 
 export interface WeightPerWeekJSONProps {
     weight: number,
-    levelOfEnforcement: number
+    date: string
 }
 
 export interface RowsProps {
@@ -20,6 +20,7 @@ export interface RowsProps {
     barangay: string,
     population?: number,
     policy?: string,
+    levelOfEnforcement?: number,
     weightPerWeek?: WeightPerWeekJSONProps[],
 }
 
@@ -39,6 +40,7 @@ export async function getRows(inclusions: RowInclusionsProps) {
                 barangay: row[1].barangay,
                 population: row[1].population,
                 policy: row[1].policy,
+                levelOfEnforcement: row[1].levelOfEnforcement,
                 weightPerWeek: row[1].weightPerWeek
             }
             return entireRow

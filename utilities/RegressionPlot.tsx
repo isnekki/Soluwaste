@@ -1,11 +1,11 @@
 import dynamic from "next/dynamic";
+import { LinearRegressionLine } from "./Computation";
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
 
 export interface RegressionPlotProps {
     x: number[],
     y: number[],
-    regressionLineX: number[],
-    regressionLineY: number[],
+    regressionLineY?: number[],
     xTitle?: string,
     yTitle?: string,
     title: string,
@@ -13,7 +13,7 @@ export interface RegressionPlotProps {
     pointTitle?: string
 }
 
-export default function RegressionPlot({ x, y, regressionLineX, regressionLineY, xTitle, yTitle, title, showLegend, pointTitle }: RegressionPlotProps) { 
+export default function RegressionPlot({ x, y, regressionLineY, xTitle, yTitle, title, showLegend, pointTitle }: RegressionPlotProps) { 
     return (
         <Plot 
             config={{
@@ -39,7 +39,7 @@ export default function RegressionPlot({ x, y, regressionLineX, regressionLineY,
                     showlegend: showLegend ?? true
                 },
                 {
-                    x: regressionLineX,
+                    x: regressionLineY ? x : [],
                     y: regressionLineY,
                     type: 'scatter',
                     mode: 'lines',

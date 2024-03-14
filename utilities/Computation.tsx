@@ -44,6 +44,5 @@ export function LinearRegressionLine(x: number[], y: number[]) {
 
     const b = average(y) - m * average(x)
     const regressionLine = x.map(x => m * x + b)
-    console.log(regressionLine)
     return regressionLine
 }

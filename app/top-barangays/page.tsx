@@ -18,20 +18,20 @@ export default function TopBarangays() {
     const [topRows, setTopRows] = useState<RowsProps[]>([])
     const [week, setWeek] = useState<number>(4)
 
-    // function getWeightReduction(weightPerMonthJSONString: WeightPerWeekJSONProps, week: number): number {
-    //     const weightPerMonth = weightPerMonthJSON
-    //     const weightReduction = (weightPerMonth[week] / weightPerMonth[week - 1]) * 100
-    //     return weightReduction
-    // }
+    function getWeightReduction(weightPerMonthJSONString: WeightPerWeekJSONProps, week: number): number {
+        const weightPerMonth = weightPerMonthJSON
+        const weightReduction = (weightPerMonth[week] / weightPerMonth[week - 1]) * 100
+        return weightReduction
+    }
 
-    // function getTopThreeBarangays(week: number, rows: RowsProps[]) {
-    //     const rowsWithWeightReduction = rows.map(row => {
-    //         const weightReduction = getWeightReduction(row.weightPerMonthJSONString, week)
-    //         return { ...row, weightReduction }
-    //     }).sort((a, b) => (b.weightReduction - a.weightReduction))
+    function getTopThreeBarangays(week: number, rows: RowsProps[]) {
+        const rowsWithWeightReduction = rows.map(row => {
+            const weightReduction = getWeightReduction(row.weightPerMonthJSONString, week)
+            return { ...row, weightReduction }
+        }).sort((a, b) => (b.weightReduction - a.weightReduction))
 
-    //     setTopRows([rowsWithWeightReduction[0], rowsWithWeightReduction[1], rowsWithWeightReduction[2]])
-    // }
+        setTopRows([rowsWithWeightReduction[0], rowsWithWeightReduction[1], rowsWithWeightReduction[2]])
+    }
 
     function increaseWeek() {
         if (week >= 52) return
@@ -45,7 +45,7 @@ export default function TopBarangays() {
 
     useEffect(() => {
         (async () => {
-            // getRows().then(rows => setRows(rows)).catch(console.error)
+            getRows().then(rows => setRows(rows)).catch(console.error)
         })();
     }, [])
 
@@ -71,12 +71,12 @@ export default function TopBarangays() {
                                 </thead>
                                 <tbody>
                                     {
-                                        // topRows.map(({ key, barangay, weightReduction }) => (
-                                        //     <tr key={key}>
-                                        //         <td className="bg-gray-200 px-8 py-5 border-b border-gray-400 text-center">{barangay}</td>
-                                        //         <td className="bg-white px-8 py-5 border-b border-gray-200 text-center">{weightReduction.toFixed(2)}%</td>
-                                        //     </tr>
-                                        // ))
+                                        topRows.map(({ key, barangay, weightReduction }) => (
+                                            <tr key={key}>
+                                                <td className="bg-gray-200 px-8 py-5 border-b border-gray-400 text-center">{barangay}</td>
+                                                <td className="bg-white px-8 py-5 border-b border-gray-200 text-center">{weightReduction.toFixed(2)}%</td>
+                                            </tr>
+                                        ))
                                     }
                                 </tbody>
                             </table>
@@ -84,7 +84,7 @@ export default function TopBarangays() {
                     </div>
                 </div>
                 <div id="middle-container" className="h-full w-2/6">
-                    {/* {
+                    {
                         topRows.map(row => (
                             <div id="graph-container" className="w-full h-1/3">
                                 <RegressionPlot 
@@ -97,7 +97,7 @@ export default function TopBarangays() {
                                 />
                             </div>
                         ))
-                    } */}
+                    }
                 </div>
                 <div id="right-container" className="flex flex-col items-center justify-center h-full w-1/6 px-4">
                     <span className="flex justify-center border border-black rounded-full w-full py-4 my-4">INTERPRETATION</span>
