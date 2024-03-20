@@ -36,8 +36,8 @@ export default function Home() {
           <SelectionButton 
             icon={Add} 
             iconAlt={"Input Icon"} 
-            name={"INPUT DATA"} 
-            href={"/input"} 
+            name={"OVERVIEW LIST"} 
+            href={"/list"} 
           />
           <SelectionButton 
             icon={Graph} 

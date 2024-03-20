@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { LinearRegressionLine } from "./Computation";
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
 
 export interface RegressionPlotProps {

@@ -17,13 +17,13 @@ export function PearsonsR(x: number[], y: number[]): number {
 
     for (let i = 0; i < x.length; i++) {
         const a = x[i] * y[i]
-        const b = x[i] * -meanY
-        const c = -meanX * y[i]
-        const d = -meanX * -meanY
+        const b = x[i] * (-meanY)
+        const c = (-meanX) * y[i]
+        const d = (-meanX) * (-meanY)
         numeratorSummationArray.push(a+b+c+d)
 
-        const x2 = x[i]**2 - meanX**2
-        const y2 = y[i]**2 - meanY**2
+        const x2 = Math.sqrt(x[i]) - Math.sqrt(meanX)
+        const y2 = Math.sqrt(y[i]) - Math.sqrt(meanY)
 
         denominatorX2SummationArray.push(x2)
         denominatorY2SummationArray.push(y2)

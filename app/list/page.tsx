@@ -68,10 +68,12 @@ export default function List() {
                                 {
                                     rows.map(({ key, dateModified, barangay, population, policy }) => (
                                         <tr key={key} className="border-t-transparent hover:opacity-75 transition duration-100 ease-out hover:ease-in">
-                                            <td className="text-left bg-gray-100 w-2/12 px-8 py-5 border-b border-gray-200">{dateModified}</td>
+                                            <td className="text-left bg-gray-100 w-2/12 px-8 py-5 border-b border-gray-200">{dateModified ? new Date(dateModified).toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' }) : "Invalid Date"}</td>
                                             <td className="text-left bg-gray-200 w-4/12 px-8 py-5 border-b border-gray-300">{barangay}</td>
                                             <td className="text-left bg-red-200 w-1/12 px-8 py-5 border-b border-red-300">{population}</td>
-                                            <td className="text-left bg-yellow-100 w-4/12 px-8 py-5 border-b border-yellow-200">{policy}</td>
+                                            <td className="text-left bg-yellow-100 w-4/12 px-8 py-5 border-b border-yellow-200">
+                                                <input type="file" placeholder={policy} accept=".pdf"/>
+                                            </td>
                                         </tr>
                                     ))
                                 }

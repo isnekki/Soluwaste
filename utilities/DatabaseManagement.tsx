@@ -5,6 +5,7 @@ interface RowInclusionsProps {
     dateModified?: boolean,
     population?: boolean,
     policy?: boolean,
+    levelOfEnforcement?: boolean,
     weightPerWeek?: boolean,
     all?: boolean
 }
@@ -54,12 +55,16 @@ export async function getRows(inclusions: RowInclusionsProps) {
         if (inclusions.dateModified) defaultRow.dateModified = row[1].dateModified
         if (inclusions.population) defaultRow.population = row[1].population
         if (inclusions.policy) defaultRow.policy = row[1].policy
+        if (inclusions.levelOfEnforcement) defaultRow.levelOfEnforcement = row[1].levelOfEnforcement
         if (inclusions.weightPerWeek) defaultRow.weightPerWeek = row[1].weightPerWeek
 
         return defaultRow
     })
-
     return rows
+}
+
+export async function setRows(rows: RowsProps) {
+    
 }
 
 

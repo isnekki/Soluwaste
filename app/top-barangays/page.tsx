@@ -13,20 +13,38 @@ import { calculateLength } from '@/utilities/WeekUtility';
 import Add from '../../assets/svgs/add.svg'
 import Minus from '../../assets/svgs/minus.svg'
 
+interface TopRowsProps extends RowsProps {
+    weightReduction: number
+}
+
 export default function TopBarangays() {
     const [rows, setRows] = useState<RowsProps[]>([])
-    const [topRows, setTopRows] = useState<RowsProps[]>([])
-    const [week, setWeek] = useState<number>(4)
+    const [topRows, setTopRows] = useState<TopRowsProps[]>([])
+    const [monthlyWeights, setMonthlyWeights] = useState<{ barangay: string, monthlyRecords: { monthNumber: number, monthAverageWeight: number }[]}[]>([])
+    const [month, setMonth] = useState<number>(new Date().getMonth())
 
-    function getWeightReduction(weightPerMonthJSONString: WeightPerWeekJSONProps, week: number): number {
-        const weightPerMonth = weightPerMonthJSON
-        const weightReduction = (weightPerMonth[week] / weightPerMonth[week - 1]) * 100
-        return weightReduction
+    function getAverageWeightOfMonth(monthNumber: number, weightPerWeek: WeightPerWeekJSONProps[] | undefined): number {
+        if (month <= 0) return 0 // Throw Error Toast
+        if (weightPerWeek === undefined) return 0
+        const weightForSelectedMonth = weightPerWeek.filter(week => new Date(week.date).getMonth() === monthNumber).map(weightObject => weightObject.weight)
+
+        if (weightForSelectedMonth.length === 0) return 0
+
+        const averageWeightForSelectedMonth = weightForSelectedMonth.reduce((previous, current) => previous + current) / weightForSelectedMonth.length
+        return averageWeightForSelectedMonth
     }
 
-    function getTopThreeBarangays(week: number, rows: RowsProps[]) {
+    function getWeightReduction(weightPerWeek: WeightPerWeekJSONProps[]): number {
+        const averageWeightThisMonth = getAverageWeightOfMonth(month, weightPerWeek)
+        const averageWeightPreviousMonth = getAverageWeightOfMonth(month - 1, weightPerWeek)
+        return (averageWeightThisMonth / averageWeightPreviousMonth) * 100
+    }
+
+    function getTopThreeBarangays(rows: RowsProps[]) {
+        console.log(rows)
         const rowsWithWeightReduction = rows.map(row => {
-            const weightReduction = getWeightReduction(row.weightPerMonthJSONString, week)
+            if (row.weightPerWeek === undefined) return { ...row, weightReduction: 0 }
+            const weightReduction = getWeightReduction(row.weightPerWeek)
             return { ...row, weightReduction }
         }).sort((a, b) => (b.weightReduction - a.weightReduction))
 
@@ -34,26 +52,41 @@ export default function TopBarangays() {
     }
 
     function increaseWeek() {
-        if (week >= 52) return
-        setWeek(week + 1)
+        if (month >= 11) return
+        setMonth(month + 1)
     }
 
     function decreaseWeek() {
-        if (week <= 1) return
-        setWeek(week - 1)
+        if (month <= 0) return
+        setMonth(month - 1)
     }
 
     useEffect(() => {
         (async () => {
-            getRows().then(rows => setRows(rows)).catch(console.error)
+            getRows({ weightPerWeek: true }).then(rows => setRows(rows)).catch(console.error)
         })();
     }, [])
 
     useEffect(() => {
         if (rows.length === 0) return
 
-        // getTopThreeBarangays(week, rows)
-    }, [week, rows])
+        getTopThreeBarangays(rows)
+    }, [month, rows])
+
+    useEffect(() => {
+        const monthlyWeights = topRows.map(topRow => {
+            const monthNumbers = [1,2,3,4,5,6,7,8,9,10,11,12]
+            return {
+                barangay: topRow.barangay,
+                monthlyRecords: monthNumbers.map(monthNumber => ({ 
+                    monthNumber, 
+                    monthAverageWeight: getAverageWeightOfMonth(monthNumber, topRow.weightPerWeek) 
+                })).sort((a, b) => a.monthNumber - b.monthNumber)
+            }
+        })
+
+        setMonthlyWeights(monthlyWeights)
+    }, [topRows])
 
     return (
         <Container>
@@ -73,8 +106,8 @@ export default function TopBarangays() {
                                     {
                                         topRows.map(({ key, barangay, weightReduction }) => (
                                             <tr key={key}>
-                                                <td className="bg-gray-200 px-8 py-5 border-b border-gray-400 text-center">{barangay}</td>
-                                                <td className="bg-white px-8 py-5 border-b border-gray-200 text-center">{weightReduction.toFixed(2)}%</td>
+                                                <td className="bg-gray-200 px-8 py-5 border-b border-gray-400 text-center w-1/3">{barangay}</td>
+                                                <td className="bg-white px-8 py-5 border-b border-gray-200 text-center w-2/3">{weightReduction.toFixed(2)}%</td>
                                             </tr>
                                         ))
                                     }
@@ -85,13 +118,14 @@ export default function TopBarangays() {
                 </div>
                 <div id="middle-container" className="h-full w-2/6">
                     {
-                        topRows.map(row => (
-                            <div id="graph-container" className="w-full h-1/3">
+                        topRows.map((row, i) => (
+                            <div key={i} id="graph-container" className="w-full h-1/3">
                                 <RegressionPlot 
-                                    x={calculateLength(row.weightPerMonthJSONString["2024"])} 
-                                    y={row.weightPerMonthJSONString["2024"]} 
-                                    regressionLineX={calculateLength(row.weightPerMonthJSONString["2024"])} 
-                                    regressionLineY={LinearRegressionLine(calculateLength(row.weightPerMonthJSONString["2024"]), row.weightPerMonthJSONString["2024"])} 
+                                    x={[1,2,3,4,5,6,7,8,9,10,11,12]} 
+                                    y={monthlyWeights.find(record => record.barangay === row.barangay)?.monthlyRecords.map(weightRecord => weightRecord.monthAverageWeight) ?? []} 
+                                    regressionLineY={LinearRegressionLine([1,2,3,4,5,6,7,8,9,10,11,12], monthlyWeights.find(record => record.barangay === row.barangay)?.monthlyRecords.map(weightRecord => weightRecord.monthAverageWeight) ?? [])} 
+                                    xTitle='Month'
+                                    yTitle='Weight'
                                     title={row.barangay}    
                                     showLegend={false}                        
                                 />
@@ -111,7 +145,7 @@ export default function TopBarangays() {
                 </div>
             </div>
             <div className="flex w-full h-[5%] px-4">
-                <div id="week-selector" className="flex items-center justify-center bg-yellow-500 border border-black rounded-full py-2">
+                <div id="week-selector" className="flex items-center justify-between bg-yellow-500 border border-black rounded-full py-2 w-1/6">
                     <button className="flex mr-4 mx-2 h-full" onClick={decreaseWeek}>
                         <div className="bg-white rounded-full p-2 flex items-center justify-center h-full w-full">
                             <Image 
@@ -122,7 +156,7 @@ export default function TopBarangays() {
                             />
                         </div>
                     </button>
-                    <span className="text-white">Week {week}</span>
+                    <span className="text-white">{new Date(new Date().getFullYear(), month, 1).toLocaleString('default', { year: 'numeric', month: 'long' })}</span>
                     <button className="flex ml-4 mx-2 h-full" onClick={increaseWeek}>
                         <div className="bg-white rounded-full p-2 flex items-center justify-center h-full w-full">
                             <Image 
